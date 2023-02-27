@@ -1,3 +1,5 @@
+-- INSTRUCTIONS: Run this file in your MySQL server to create the database and tables. --
+
 CREATE DATABASE IF NOT EXISTS companydb;
 
 USE companydb;
@@ -12,7 +14,7 @@ CREATE TABLE categoria_producto (
   PRIMARY KEY(id)
 );
 
-CREATE TABLE categoria_sucursales (
+CREATE TABLE sucursales (
   id INT(11) NOT NULL AUTO_INCREMENT,
   correo VARCHAR(60) DEFAULT NULL,
   departamento VARCHAR(60) DEFAULT NULL,
@@ -24,12 +26,3 @@ CREATE TABLE categoria_sucursales (
   activo TINYINT(1) NOT NULL DEFAULT '1',
   PRIMARY KEY(id)
 );
-
-DESCRIBE employee;
-
-INSERT INTO employee values 
-  (1, 'Ryan Ray', 20000),
-  (2, 'Joe McMillan', 40000),
-  (3, 'John Carter', 50000);
-
-SELECT * FROM employee;
