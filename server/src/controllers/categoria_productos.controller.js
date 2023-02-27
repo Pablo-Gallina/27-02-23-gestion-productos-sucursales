@@ -61,7 +61,7 @@ export const createProducto = async (req, res) => {
   }
 };
 
-export const updateProdcuto = async (req, res) => {
+export const updateProducto = async (req, res) => {
   try {
     const { id } = req.params;
     const { description, categoria } = req.body;
