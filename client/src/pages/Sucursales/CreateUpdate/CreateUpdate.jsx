@@ -16,11 +16,14 @@ import { toast } from "react-hot-toast";
 const CreateUpdate = ({ isOpen, onClose, getData, isUpdate, dataUpdate }) => {
   const [loading_save, setLoadingSave] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [departamento, setDepartamento] = useState(null);
+  const [municipio, setMunicipio] = useState(null);
 
   const modalTitle = isUpdate ? "Editar sucursal" : "Nueva sucursal";
   const buttonTitle = isUpdate ? "Actualizar sucursal" : "Agregar sucursal";
 
   const {
+    getValues,
     control,
     register,
     handleSubmit,
@@ -69,6 +72,12 @@ const CreateUpdate = ({ isOpen, onClose, getData, isUpdate, dataUpdate }) => {
     }
   }, [isUpdate]);
 
+  useEffect(() => {
+    console.log(dataUpdate);
+    if (dataUpdate.departamento) setDepartamento(dataUpdate.departamento);
+    if (dataUpdate.municipio) setMunicipio(dataUpdate.municipio);
+  }, [dataUpdate]);
+
   return (
     <>
       <ModalForm
@@ -100,6 +109,8 @@ const CreateUpdate = ({ isOpen, onClose, getData, isUpdate, dataUpdate }) => {
           </>
         ) : (
           <SucursalesForm
+            departamento={departamento}
+            municipio={municipio}
             errors={errors}
             register={register}
             control={control}

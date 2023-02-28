@@ -7,6 +7,10 @@ import Table from "../../../components/Table";
 import CreateUpdate from "../CreateUpdate/CreateUpdate";
 import { TableButtonAction } from "../../../components/TableButton";
 import { getSucursales } from "../../../services/sucursales";
+import {
+  departamentosOptions,
+  municipiosOptions,
+} from "../../../utils/constantes";
 
 const SucursalesList = () => {
   const [sucursales, setSucursales] = useState([]);
@@ -31,6 +35,33 @@ const SucursalesList = () => {
       },
 
       {
+        Header: "departamento",
+        accessor: "departamento",
+        Cell: ({ value }) => {
+          try {
+            return departamentosOptions[value - 1].label;
+          } catch (error) {
+            return "---";
+          }
+        },
+      },
+
+      {
+        Header: "municipio",
+        accessor: "municipio",
+        Cell: ({ value, row }) => {
+          try {
+            const index = municipiosOptions[row.values.departamento]?.findIndex(
+              (m) => m.id === value
+            );
+            return municipiosOptions[row.values.departamento][index].label;
+          } catch (error) {
+            return "---";
+          }
+        },
+      },
+
+      {
         Header: "",
         accessor: "id",
         Cell: ({ row }) => (
@@ -41,6 +72,7 @@ const SucursalesList = () => {
             onOpenModalUpdate={onOpen}
             setIsUpdate={setIsUpdate}
             setDataUpdate={setDataUpdate}
+            isSucursal
           />
         ),
       },

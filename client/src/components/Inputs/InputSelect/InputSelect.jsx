@@ -86,15 +86,12 @@ const InputSelect = ({
   validation = false,
   defaultValue = true,
   defaultValueFirts = false,
-  defaultOptionValue = 0,
+  defaultOptionValue = null,
   lableEmpty = false,
+  handleChange = () => {},
 }) => {
   const handleChangeType = (option) => {
-    // setItemType(option);
-    // var options = getOptions(option.value);
-    // setList(options);
-    // setGender(null);
-    console.log(option);
+    handleChange(option);
   };
 
   return (
@@ -122,11 +119,13 @@ const InputSelect = ({
             placeholder={placeholder}
             options={options}
             onChange={(val) => {
-              onChange(val.value);
+              onChange(val.id);
               handleChangeType(val);
             }}
             styles={customStyles(errors && errors[key_name])}
-            defaultValue={null}
+            defaultValue={
+              defaultOptionValue ? options[defaultOptionValue] : null
+            }
             isDisabled={disabled}
           />
         )}
