@@ -5,7 +5,6 @@ import { Routes, Route } from "react-router-dom";
 import PublicRouter from "./config/PublicRouter";
 
 // pages
-import Payment from "../pages/PaymentPage";
 import MainContent from "../pages/MainContent";
 
 const PublicRoutes = () => {

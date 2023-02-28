@@ -5,8 +5,8 @@ const Title = ({
   content,
   black = false,
   fontWeight = "bold",
-  sizeBase = "4xl",
-  smBase = "5xl",
+  sizeBase = "3xl",
+  smBase = "4xl",
 }) => {
   return (
     <Text

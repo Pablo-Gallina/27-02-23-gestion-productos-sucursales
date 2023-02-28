@@ -6,9 +6,7 @@ import { HeaderViewContent } from "../../../components/HeaderViewContent/HeaderV
 import Table from "../../../components/Table";
 import CreateUpdate from "../CreateUpdate/CreateUpdate";
 import { getCategoriaProductos } from "../../../services/categoriaProducto";
-// import { role_name } from "../../../../Utils/constants";
-// import { TableButtonBrands } from "../../../../components/Buttons/TableButton";
-// import ModalAlert from "../../../../components/Modal/ModalAlert";
+import { TableButtonAction } from "../../../components/TableButton";
 
 const CategoriaProductoList = () => {
   const [categoriaProducto, setCategoriaProducto] = useState([]);
@@ -25,17 +23,18 @@ const CategoriaProductoList = () => {
         accessor: "description",
       },
 
-      // {
-      //   Header: "",
-      //   accessor: "id",
-      //   Cell: ({ row }) => (
-      //     <TableButtonBrands
-      //       row={row}
-      //       onClick={onOpen2}
-      //       onOpenModalUpdate={onOpen}
-      //     />
-      //   ),
-      // },
+      {
+        Header: "",
+        accessor: "id",
+        Cell: ({ row }) => (
+          <TableButtonAction
+            name="Categoría"
+            row={row}
+            getData={getData}
+            onOpenModalUpdate={onOpen}
+          />
+        ),
+      },
     ],
     []
   );
