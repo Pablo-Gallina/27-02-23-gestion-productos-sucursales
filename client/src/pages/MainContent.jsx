@@ -7,6 +7,7 @@ import TabList from "../components/TabPane/TabList";
 import Spinner from "../components/Spinner";
 
 const CategoriaProducto = lazy(() => import("./CategoriaProducto/List"));
+const Sucursales = lazy(() => import("./Sucursales/List"));
 // const Brands = lazy(() => import("./Brands/List"));
 // const Variants = lazy(() => import("./Variants/List"));
 
@@ -58,8 +59,7 @@ const MainContent = () => {
           <TabPanel>
             {brands && (
               <Suspense fallback={<Spinner />}>
-                {/* <Brands /> */}
-                <h1 className="text-2xl font-bold">Marcas</h1>
+                <Sucursales />
               </Suspense>
             )}
           </TabPanel>

@@ -5,11 +5,11 @@ import { HeaderViewContent } from "../../../components/HeaderViewContent/HeaderV
 
 import Table from "../../../components/Table";
 import CreateUpdate from "../CreateUpdate/CreateUpdate";
-import { getCategoriaProductos } from "../../../services/categoriaProducto";
 import { TableButtonAction } from "../../../components/TableButton";
+import { getSucursales } from "../../../services/sucursales";
 
-const CategoriaProductoList = () => {
-  const [categoriaProducto, setCategoriaProducto] = useState([]);
+const SucursalesList = () => {
+  const [sucursales, setSucursales] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
   const [dataUpdate, setDataUpdate] = useState({});
@@ -17,12 +17,17 @@ const CategoriaProductoList = () => {
   const columns = React.useMemo(
     () => [
       {
-        Header: "Categoría",
-        accessor: "categoria",
+        Header: "Correo",
+        accessor: "correo",
       },
       {
-        Header: "Descripción",
-        accessor: "description",
+        Header: "dirección",
+        accessor: "direccion",
+      },
+
+      {
+        Header: "telefono",
+        accessor: "telefono",
       },
 
       {
@@ -57,8 +62,8 @@ const CategoriaProductoList = () => {
 
   const getData = async () => {
     setLoading(true);
-    const data = await getCategoriaProductos();
-    setCategoriaProducto(data);
+    const data = await getSucursales();
+    setSucursales(data);
     setLoading(false);
   };
 
@@ -66,7 +71,7 @@ const CategoriaProductoList = () => {
     getData();
 
     return () => {
-      setCategoriaProducto([]);
+      setSucursales([]);
     };
   }, []);
 
@@ -84,15 +89,15 @@ const CategoriaProductoList = () => {
 
       {/* Title and create button */}
       <HeaderViewContent
-        titleView="Categorías productos"
-        textButton="Nueva categ. producto"
+        titleView="Sucursales"
+        textButton="Nueva Sucursal"
         onOpen={onOpenModal}
       />
 
       {/* Category table */}
-      <Table columns={columns} data={categoriaProducto} loading={loading} />
+      <Table columns={columns} data={sucursales} loading={loading} />
     </>
   );
 };
 
-export default CategoriaProductoList;
+export default SucursalesList;
