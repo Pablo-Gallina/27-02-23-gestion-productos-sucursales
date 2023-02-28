@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 // import { useDispatch, useSelector } from "react-redux";
@@ -6,16 +6,17 @@ import { useForm } from "react-hook-form";
 import ModalForm from "../../../components/ModalForm";
 import CategoriaProductoForm from "./CategoriaProductoForm";
 import { Skeleton } from "@chakra-ui/react";
-import { createCategoriaProducto } from "../../../services/categoriaProducto";
+import {
+  createCategoriaProducto,
+  getCategoriaProductoById,
+  patchCategoriaProducto,
+} from "../../../services/categoriaProducto";
 import { toast } from "react-hot-toast";
 
-const CreateUpdate = ({ isOpen, onClose, getData }) => {
-  // const brandSelected = useSelector(selectBrandDataUpdate);
-  // const loading = useSelector(selectLoadingupdateBrand);
-  // const isUpdate = useSelector(selectIsUpdate);
-  const isUpdate = false;
-  const loading = false;
-  // const dispatch = useDispatch();
+const CreateUpdate = ({ isOpen, onClose, getData, isUpdate, dataUpdate }) => {
+  const [loading_save, setLoadingSave] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const modalTitle = isUpdate ? "Editar Cat. Producto" : "Nueva Cat. Producto";
   const buttonTitle = isUpdate
     ? "Actualizar Cat. Producto"
@@ -29,31 +30,45 @@ const CreateUpdate = ({ isOpen, onClose, getData }) => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    const create = createCategoriaProducto(data);
+    if (isUpdate) {
+      setLoadingSave(true);
+      const update = patchCategoriaProducto(dataUpdate.id, data);
 
-    await toast.promise(create, {
-      loading: "Creando...",
-      success: "Categoría creada con éxito",
-      error: "Error al crear la categoría",
-    });
+      await toast.promise(update, {
+        loading: "Actualizando...",
+        success: "Categoría actualizada con éxito",
+        error: "Error al actualizar la categoría",
+      });
+
+      setLoadingSave(false);
+    } else {
+      const create = createCategoriaProducto(data);
+
+      await toast.promise(create, {
+        loading: "Creando...",
+        success: "Categoría creada con éxito",
+        error: "Error al crear la categoría",
+      });
+    }
 
     onClose();
 
     await getData();
-    // if (isUpdate) {
-    //   dispatch(updateBrand({ ...data, onClose, reset }));
-    // } else {
-    //   dispatch(createBrand({ ...data, onClose, reset }));
-    // }
   };
 
-  // useEffect(() => {
-  //   if (isUpdate) {
-  //     reset(brandSelected);
-  //   } else {
-  //     reset({});
-  //   }
-  // }, [isUpdate, brandSelected]);
+  const getDataUpdate = async () => {
+    setLoading(true);
+    const data = await getCategoriaProductoById(dataUpdate.id);
+
+    setLoading(false);
+    reset(data);
+  };
+
+  useEffect(() => {
+    if (isUpdate) {
+      getDataUpdate();
+    }
+  }, [isUpdate]);
 
   return (
     <>
@@ -65,7 +80,7 @@ const CreateUpdate = ({ isOpen, onClose, getData }) => {
         onSubmit={onSubmit}
         textButtonClose="Cancelar"
         textButtonSubmit={buttonTitle}
-        // loadingButtonSubmit={loading_save}
+        loadingButtonSubmit={loading_save}
       >
         {loading ? (
           <>

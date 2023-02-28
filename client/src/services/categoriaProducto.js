@@ -13,6 +13,19 @@ export const getCategoriaProductos = async () => {
   }
 };
 
+// get categoriaProducto by id
+export const getCategoriaProductoById = async (id) => {
+  try {
+    const res = await axios.get(
+      `http://localhost:3000/api/categoria_productos/${id}`
+    );
+    return res.data;
+  } catch (error) {
+    toast.error("Error al obtener la categoria de producto");
+    return null;
+  }
+};
+
 // create categoriaProducto
 export const createCategoriaProducto = async (categoriaProducto) => {
   try {
@@ -39,3 +52,17 @@ export const deleteCategoriaProducto = async (id) => {
     return null;
   }
 };
+
+// patch categoriaProducto
+export const patchCategoriaProducto = async (id, categoriaProducto) => {
+  try {
+    const res = await axios.patch(
+      `http://localhost:3000/api/categoria_productos/${id}`,
+      categoriaProducto
+    );
+    return res.data;
+  } catch (error) {
+    toast.error("Error al actualizar la categoria de producto");
+    return null;
+  }
+}

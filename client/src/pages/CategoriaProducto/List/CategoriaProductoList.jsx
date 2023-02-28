@@ -11,6 +11,8 @@ import { TableButtonAction } from "../../../components/TableButton";
 const CategoriaProductoList = () => {
   const [categoriaProducto, setCategoriaProducto] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [isUpdate, setIsUpdate] = useState(false);
+  const [dataUpdate, setDataUpdate] = useState({});
 
   const columns = React.useMemo(
     () => [
@@ -32,6 +34,8 @@ const CategoriaProductoList = () => {
             row={row}
             getData={getData}
             onOpenModalUpdate={onOpen}
+            setIsUpdate={setIsUpdate}
+            setDataUpdate={setDataUpdate}
           />
         ),
       },
@@ -41,6 +45,11 @@ const CategoriaProductoList = () => {
 
   // modal create update brand
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const handleCloseModal = () => {
+    setIsUpdate(false);
+    onClose();
+  };
 
   const onOpenModal = (row) => {
     // dispatch(setIsUpdate(false));
@@ -68,8 +77,10 @@ const CategoriaProductoList = () => {
       <CreateUpdate
         isOpen={isOpen}
         onOpen={onOpen}
-        onClose={onClose}
+        onClose={handleCloseModal}
         getData={getData}
+        isUpdate={isUpdate}
+        dataUpdate={dataUpdate}
       />
 
       {/* Filter, searcher and create button */}

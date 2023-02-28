@@ -4,16 +4,14 @@ import { MenuItem, MenuList } from "@chakra-ui/react";
 import { deleteCategoriaProducto } from "../../services/categoriaProducto";
 import { toast } from "react-hot-toast";
 
-// import { useDispatch } from "react-redux";
-// import {
-//   getBrand,
-//   setIsUpdate,
-//   setBrandSelected,
-// } from "../../../redux/features/brandSlice";
-
-const TableButtonAction = ({ name, row, getData, onOpenModalUpdate }) => {
-  // const dispatch = useDispatch();
-
+const TableButtonAction = ({
+  name,
+  row,
+  getData,
+  onOpenModalUpdate,
+  setIsUpdate,
+  setDataUpdate,
+}) => {
   const handleDelete = async () => {
     const delete_data = deleteCategoriaProducto(row.values.id);
 
@@ -27,9 +25,8 @@ const TableButtonAction = ({ name, row, getData, onOpenModalUpdate }) => {
   };
 
   const handleUpdateBrand = () => {
-    // const { id: brand_id } = row.values;
-    // dispatch(getBrand(brand_id));
-    // dispatch(setIsUpdate(true));
+    setDataUpdate(row.values);
+    setIsUpdate(true);
     onOpenModalUpdate();
   };
 
