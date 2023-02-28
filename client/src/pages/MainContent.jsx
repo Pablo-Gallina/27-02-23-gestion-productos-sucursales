@@ -20,7 +20,7 @@ const MainContent = () => {
   const { categories, brands, variants } = module;
 
   return (
-    <Box mx={{ base: "0", md: "20vw" }}>
+    <Box mx={{ base: "0", md: "20vw" }} mt="8">
       {/* Tab Pane */}
       <Tabs variant="unstyled">
         <TabList>

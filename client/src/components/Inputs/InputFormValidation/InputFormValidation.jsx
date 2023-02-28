@@ -1,11 +1,6 @@
 import React from "react";
 
-import {
-  Input,
-  InputGroup,
-  InputLeftElement,
-  InputRightElement,
-} from "@chakra-ui/input";
+import { Input, InputGroup, InputRightElement } from "@chakra-ui/input";
 import { Image } from "@chakra-ui/react";
 
 import {
@@ -18,7 +13,6 @@ import ErrorIcon from "../../../assets/img/icons/error-icon.svg";
 import useZIndex from "../../../hooks/useZIndex.jsx";
 
 const InputFormValidation = ({
-  Icon,
   placeholder,
   disabled,
   error = false,
@@ -39,22 +33,6 @@ const InputFormValidation = ({
     <FormControl isInvalid={errors[key_name]}>
       {label && <FormLabel>{label}</FormLabel>}
       <InputGroup>
-        <InputLeftElement
-          pointerEvents="none"
-          color="gray.300"
-          fontSize="1.2em"
-          zIndex={zIndex}
-          // children="$"
-          children={
-            <Image
-              src={Icon}
-              alt={"icon"}
-              width="17px"
-              marginLeft="7px"
-              marginTop="6px"
-            />
-          }
-        />
         <Input
           minHeight="48px"
           autoComplete="off"

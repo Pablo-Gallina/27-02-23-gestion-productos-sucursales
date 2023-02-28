@@ -12,3 +12,17 @@ export const getCategoriaProductos = async () => {
     return [];
   }
 };
+
+// create categoriaProducto
+export const createCategoriaProducto = async (categoriaProducto) => {
+  try {
+    const res = await axios.post(
+      "http://localhost:3000/api/categoria_productos",
+      categoriaProducto
+    );
+    return res.data;
+  } catch (error) {
+    toast.error("Error al crear la categoria de producto");
+    return null;
+  }
+};

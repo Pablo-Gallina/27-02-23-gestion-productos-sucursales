@@ -3,9 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useDisclosure } from "@chakra-ui/react";
 import { HeaderViewContent } from "../../../components/HeaderViewContent/HeaderViewContent";
 
-// import CreateUpdate from "../CreateUpdate/CreateUpdate";
-
 import Table from "../../../components/Table";
+import CreateUpdate from "../CreateUpdate/CreateUpdate";
 import { getCategoriaProductos } from "../../../services/categoriaProducto";
 // import { role_name } from "../../../../Utils/constants";
 // import { TableButtonBrands } from "../../../../components/Buttons/TableButton";
@@ -45,18 +44,18 @@ const CategoriaProductoList = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const onOpenModal = (row) => {
-    dispatch(setIsUpdate(false));
+    // dispatch(setIsUpdate(false));
     onOpen();
   };
 
-  useEffect(() => {
-    const getData = async () => {
-      setLoading(true);
-      const data = await getCategoriaProductos();
-      setCategoriaProducto(data);
-      setLoading(false);
-    };
+  const getData = async () => {
+    setLoading(true);
+    const data = await getCategoriaProductos();
+    setCategoriaProducto(data);
+    setLoading(false);
+  };
 
+  useEffect(() => {
     getData();
 
     return () => {
@@ -67,7 +66,12 @@ const CategoriaProductoList = () => {
   return (
     <>
       {/* Modal CreateUpdate */}
-      {/* <CreateUpdate isOpen={isOpen} onOpen={onOpen} onClose={onClose} /> */}
+      <CreateUpdate
+        isOpen={isOpen}
+        onOpen={onOpen}
+        onClose={onClose}
+        getData={getData}
+      />
 
       {/* Filter, searcher and create button */}
       <HeaderViewContent

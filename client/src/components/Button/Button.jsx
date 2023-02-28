@@ -51,7 +51,7 @@ const Button = ({
       borderColor="secondary.500"
       color={
         primary
-          ? "brand.white"
+          ? "brand.black"
           : secondary
           ? "brand.white"
           : outline
