@@ -4,7 +4,7 @@ import InputFormValidation from "../components/Inputs/InputFormValidation/InputF
 import cardIcon from "../assets/img/icons/card-icon.svg";
 import Button from "../components/Button/Button";
 import InputSelect from "../components/Inputs/InputSelect/InputSelect";
-import cards from "../assets/img/icons/cards.png";
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";

@@ -6,6 +6,7 @@ import PublicRouter from "./config/PublicRouter";
 
 // pages
 import Payment from "../pages/PaymentPage";
+import MainContent from "../pages/MainContent";
 
 const PublicRoutes = () => {
   /* RUTAS PUBLICAS */
@@ -19,7 +20,7 @@ const PublicRoutes = () => {
           path="/"
           element={
             <PublicRouter>
-              <Payment />
+              <MainContent />
             </PublicRouter>
           }
         />
